@@ -34,8 +34,9 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height, fie
         );
       });
 
-  if (validation.length > 0)
+  if (validation.length > 0) {
     return validationElement;
+  }
 
   const frame = data.series[0];
 

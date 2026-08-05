@@ -120,9 +120,9 @@ export const MatrixOptionsEditor = (props: Props) => {
             
   }; 
 
-function filterOptions(options: SelectableValue<string>[], isGroupSelect : boolean): SelectableValue<string>[] | undefined {
+function filterOptions(options: SelectableValue<string>[], isGroupSelect: boolean): SelectableValue<string>[] | undefined {
 
-        let selectedOptions : string[] = [...props.value.RowGroups, ...props.value.ColumnGroups];
+        let selectedOptions: string[] = [...props.value.RowGroups, ...props.value.ColumnGroups];
 
         //i was really tired of this react effects/hooks/panel life cycle/events/grafana components/other mysterious shit
         //so its done in this way. its dumb, but it is simple and it does work

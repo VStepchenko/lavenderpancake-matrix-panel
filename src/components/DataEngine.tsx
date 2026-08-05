@@ -101,11 +101,13 @@ export class DataEngine {
       result.count++;
       result.sum += value;
 
-      if (value < result.min)
+      if (value < result.min) {
         result.min = value;
+      }
 
-      if (value > result.max)
+      if (value > result.max) {
         result.max = value;
+      }
     }
 
     result.avg = result.sum / result.count;
@@ -335,11 +337,17 @@ function matrixMemberComparerFunction(a: MatrixMember, b: MatrixMember): number 
     const ascending = true;
 
     // 1. Handle identical values
-    if (valA === valB) return 0;
+    if (valA === valB) {
+      return 0;
+    }
 
     // 2. Handle null/undefined (push to the bottom)
-    if (valA === null || valA === undefined) return 1;
-    if (valB === null || valB === undefined) return -1;
+    if (valA === null || valA === undefined) {
+      return 1;
+    }
+    if (valB === null || valB === undefined) {
+      return -1;
+    }
 
     // 3. Compare Numbers
     if (typeof valA === 'number' && typeof valB === 'number') {

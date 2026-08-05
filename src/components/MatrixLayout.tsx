@@ -236,8 +236,9 @@ export class LayoutGenerator {
         const rowData = this.rowIndex[rowKey];
         const colData = this.colIndex[colKey];
 
-        if ((!rowData) || (!colData))
+        if ((!rowData) || (!colData)) {
             return result;
+        }
 
         const keys = rowData.reduce<string[]>((acc, row) => {
             const match = colData.find(col => col === row);
@@ -311,11 +312,13 @@ export class LayoutGenerator {
             result.count += value.count;
             result.sum += value.sum;
 
-            if (value.min < result.min)
+            if (value.min < result.min) {
                 result.min = value.min;
+            }
 
-            if (value.max > result.max)
+            if (value.max > result.max) {
                 result.max = value.max;
+            }
         }
 
         result.avg = result.sum / result.count;
