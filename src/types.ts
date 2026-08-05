@@ -53,7 +53,7 @@ export class MatrixMember {
     this.matrixMembers = [];
   }
 
-  leafCount() : number {
+  leafCount(): number {
     
     if (this.matrixMembers.length == 0) {
         return 1;
@@ -66,7 +66,7 @@ export class MatrixMember {
 
   }
 
-  static createTotal() : MatrixMember {
+  static createTotal(): MatrixMember {
 
     const result = new MatrixMember("Total", MatrixMemberType.Total, "Total");
 
@@ -74,7 +74,7 @@ export class MatrixMember {
 
   }
 
-  static createEmpty() : MatrixMember {
+  static createEmpty(): MatrixMember {
 
     const result = new MatrixMember("Empty", MatrixMemberType.Empty, undefined);
 
@@ -82,7 +82,7 @@ export class MatrixMember {
 
   }
 
-  static createRoot() : MatrixMember {
+  static createRoot(): MatrixMember {
 
     const result = new MatrixMember("Root", MatrixMemberType.Root, undefined);
 
@@ -90,7 +90,7 @@ export class MatrixMember {
 
   }
 
-  static createRegular(name : string, value : unknown, field : Field) : MatrixMember {
+  static createRegular(name: string, value: unknown, field: Field): MatrixMember {
 
     const result = new MatrixMember(name, MatrixMemberType.Regular, value);
     result.field = field;

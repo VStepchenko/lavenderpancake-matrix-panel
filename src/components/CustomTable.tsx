@@ -46,7 +46,7 @@ interface CustomTableProps{
   layout: MatrixLayout;
 }
 
-export const CustomTable = (props:CustomTableProps) => {
+export const CustomTable = (props: CustomTableProps) => {
 
   const styles = useStyles2(getStyles);
 
@@ -56,11 +56,12 @@ export const CustomTable = (props:CustomTableProps) => {
     <div className={styles.table}>
         <table width={props.width - 12} data-testid = "table">
 
-        {props.layout.MatrixRows.map((row) => 
-          <tr>
+        {props.layout.MatrixRows.map((row, idx) => 
+          <tr key={idx}>
             {
-              row.MatrixCells.map((cell) => 
+              row.MatrixCells.map((cell, idx) => 
                 <td 
+                  key={idx}
                   colSpan={cell.colSpan > 1 ? cell.colSpan : undefined}  
                   rowSpan={cell.rowSpan > 1 ? cell.rowSpan : undefined}
                   className = {cell.isTotal ? 'total' : undefined}

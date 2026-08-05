@@ -5,17 +5,17 @@ import { useTheme2 } from "@grafana/ui";
 
 export class LayoutGenerator {
 
-  dataEngine : DataEngine;
-  matrixOptions : MatrixOptions;
+  dataEngine: DataEngine;
+  matrixOptions: MatrixOptions;
   rowIndex: {[key: string]: string[]} = {};
   colIndex: {[key: string]: string[]} = {};
 
-  constructor(dataEngine : DataEngine, matrixOptions : MatrixOptions) {
+  constructor(dataEngine: DataEngine, matrixOptions: MatrixOptions) {
     this.dataEngine = dataEngine;
     this.matrixOptions = matrixOptions;
   }
 
-  processColumnGroup(matrixLayout : MatrixLayout, matrixMember : MatrixMember, depth : number) {
+  processColumnGroup(matrixLayout: MatrixLayout, matrixMember: MatrixMember, depth: number) {
 
     let row = matrixLayout.MatrixRows[depth];
     if (!row) {
@@ -35,7 +35,7 @@ export class LayoutGenerator {
 
   }
 
-  processRowGroup(matrixLayout : MatrixLayout, matrixMember : MatrixMember, gap : number) {
+  processRowGroup(matrixLayout: MatrixLayout, matrixMember: MatrixMember, gap: number) {
 
     let colGroupsCount = this.matrixOptions.ColumnGroups.length;
 
@@ -58,7 +58,7 @@ export class LayoutGenerator {
     }    
   }
 
-  createLayout () : MatrixLayout {
+  createLayout (): MatrixLayout {
 
     let colCount = this.dataEngine.columnGroups.leafCount();
     let rowCount = this.dataEngine.rowGroups.leafCount();
@@ -114,13 +114,13 @@ export class LayoutGenerator {
 
   }
 
-    createAggKey(matrixMembers : MatrixMember[]) : string {
+    createAggKey(matrixMembers: MatrixMember[]): string {
         
         let result = '';
 
         for (let i = 0; i < matrixMembers.length; i++) {
 
-            const value = matrixMembers[i].type == MatrixMemberType.Regular ? matrixMembers[i].value : this.dataEngine.wildCardKey;
+            const value = matrixMembers[i].type == MatrixMemberType.Regular ? matrixMembers[i].value: this.dataEngine.wildCardKey;
             result = result + value;
 
             if (i < (matrixMembers.length - 1) ){
@@ -159,7 +159,7 @@ export class LayoutGenerator {
                     const dataCells = this.getNaive(bodyCell.ColumnGroups, bodyCell.RowGroups);
                     const totalData = this.mergeAggregateData(dataCells);
                     const totalValue = this.dataEngine.getAggregateValue(totalData);
-                    bodyCell.value = dataCells.length > 0 ? totalValue : undefined;
+                    bodyCell.value = dataCells.length > 0 ? totalValue: undefined;
                     bodyCell.isTotal = true;
                 }
             }
@@ -205,9 +205,9 @@ export class LayoutGenerator {
         })
     }
 
-    createPossibleKeys(values : any[]) : string[] {
+    createPossibleKeys(values: any[]): string[] {
 
-        const result : string[] = [];
+        const result: string[] = [];
         const count = values.length;
         const wildCards = Array.from({ length: count }, () => this.dataEngine.wildCardKey);
 
@@ -227,9 +227,9 @@ export class LayoutGenerator {
 
     }
 
-    getIndexed(cols: MatrixMember[], rows: MatrixMember[]) : AggregateData[] {
+    getIndexed(cols: MatrixMember[], rows: MatrixMember[]): AggregateData[] {
         
-        const result : AggregateData[] = [];
+        const result: AggregateData[] = [];
 
         const rowKey = this.createAggKey(rows);
         const colKey = this.createAggKey(cols);
@@ -252,9 +252,9 @@ export class LayoutGenerator {
         return data;
     }
 
-    getNaive(cols: MatrixMember[], rows: MatrixMember[]) : AggregateData[] {
+    getNaive(cols: MatrixMember[], rows: MatrixMember[]): AggregateData[] {
 
-        const result : AggregateData[] = [];
+        const result: AggregateData[] = [];
 
         const view = new DataFrameView(this.dataEngine.groupedDataFrame);
         view.forEach((row) => {
@@ -297,9 +297,9 @@ export class LayoutGenerator {
         return result;
     }
 
-    mergeAggregateData(data: AggregateData[]) : AggregateData {
+    mergeAggregateData(data: AggregateData[]): AggregateData {
 
-        const result : AggregateData = {min : 0, max : 0, avg : 0, sum : 0, count : 0};
+        const result: AggregateData = {min: 0, max: 0, avg: 0, sum: 0, count: 0};
 
         result.min = Number.MAX_SAFE_INTEGER;
         result.max = Number.MIN_SAFE_INTEGER;
@@ -386,7 +386,7 @@ export class LayoutGenerator {
         return currentMatrixMembers;
     }
 
-  createDummyLayout () : MatrixLayout {
+  createDummyLayout (): MatrixLayout {
 
     const result = new MatrixLayout();
 
@@ -412,7 +412,7 @@ export class LayoutGenerator {
 
   }
 
-    createMatrixCellFormatted(matrixMember : MatrixMember) : MatrixCell {
+    createMatrixCellFormatted(matrixMember: MatrixMember): MatrixCell {
         
         let value = matrixMember.value;
 
@@ -421,7 +421,7 @@ export class LayoutGenerator {
 
         if (isTime && hasTimeUnit) {
             const theme = useTheme2();
-            const dop = { field : matrixMember.field!, theme :  theme };
+            const dop = { field: matrixMember.field!, theme:  theme };
             const dp = getDisplayProcessor(dop);
             const formattedvalue = dp(matrixMember.value);
             value = formattedvalue.text;
@@ -448,14 +448,14 @@ export class MatrixRow {
 
 export class MatrixCell {
 
-    colSpan : number = 1;
-    rowSpan : number = 1;
-    value : any;
-    isTotal : boolean = false;
-    isCorner : boolean = false;
-    isGroup : boolean = false;
+    colSpan: number = 1;
+    rowSpan: number = 1;
+    value: any;
+    isTotal: boolean = false;
+    isCorner: boolean = false;
+    isGroup: boolean = false;
 
-    constructor (value : any) {
+    constructor (value: any) {
         this.value = value;
     }
 
@@ -467,13 +467,13 @@ export class MatrixCell {
 
 class DataCell {
 
-    ColumnGroups : MatrixMember [] = []
-    RowGroups : MatrixMember [] = []
+    ColumnGroups: MatrixMember [] = []
+    RowGroups: MatrixMember [] = []
 
-    value : any;
-    isTotal : boolean = false;
+    value: any;
+    isTotal: boolean = false;
 
-    constructor (value : any) {
+    constructor (value: any) {
         this.value = value;
     }
 

@@ -4,17 +4,17 @@ import { AggregateData, AggregateFunctionType, MatrixMember, MatrixOptions } fro
 export class DataEngine {
 
   dataFrame: DataFrame;
-  matrixOptions : MatrixOptions;
-  groupedDataFrame : DataFrame;
-  columnGroups : MatrixMember ;
-  rowGroups : MatrixMember ;
+  matrixOptions: MatrixOptions;
+  groupedDataFrame: DataFrame;
+  columnGroups: MatrixMember ;
+  rowGroups: MatrixMember ;
 
   aggregatedData: {[key: string]: AggregateData} = {};
 
   aggKeySeparator = '-';
   wildCardKey = '*';
 
-  constructor(dataFrame: DataFrame, matrixOptions : MatrixOptions) {
+  constructor(dataFrame: DataFrame, matrixOptions: MatrixOptions) {
     this.dataFrame = dataFrame;
     this.matrixOptions = matrixOptions;
     this.groupedDataFrame = dataFrame; //temporary hack to avoid undefined in type definition
@@ -22,7 +22,7 @@ export class DataEngine {
     this.rowGroups = MatrixMember.createRoot(); //dirty hack
   }
 
-  getAggKey(fields : Field<any>[], index : number): string {
+  getAggKey(fields: Field<any>[], index: number): string {
 
     let result = '';
 
@@ -39,14 +39,14 @@ export class DataEngine {
 
   }
 
-  createField(source : Field<any>) : Field<any> {
+  createField(source: Field<any>): Field<any> {
 
     const values: unknown[] = [];
     const field = { 
       name: source.name, 
       type: source.type, 
       values: values, 
-      display : source.display, 
+      display: source.display, 
       config: {
         ...source.config,
       } 
@@ -68,7 +68,7 @@ export class DataEngine {
     return field;
   }
 
-  getAggregateValue(data : AggregateData) : number {
+  getAggregateValue(data: AggregateData): number {
 
     switch (this.matrixOptions.AggregateFunction) {
     case AggregateFunctionType.Avg:
@@ -85,11 +85,11 @@ export class DataEngine {
 
   }
 
-  agrregateRecords(indexes : number[]) : AggregateData{
+  agrregateRecords(indexes: number[]): AggregateData{
 
     const dataField = this.dataFrame.fields.filter(item => this.matrixOptions.DataField === item.name)[0];
     
-    const result : AggregateData = {min : 0, max : 0, avg : 0, sum : 0, count : 0};
+    const result: AggregateData = {min: 0, max: 0, avg: 0, sum: 0, count: 0};
 
     result.min = Number.MAX_SAFE_INTEGER;
     result.max = Number.MIN_SAFE_INTEGER;
@@ -114,14 +114,14 @@ export class DataEngine {
 
   }
 
-  processGroupedDataItem(row : any, matrixMember : MatrixMember, fields : Field<any>[], depth : number) {
+  processGroupedDataItem(row: any, matrixMember: MatrixMember, fields: Field<any>[], depth: number) {
 
     if (depth > fields.length - 1) {
       return;
     }
 
     const currentField = fields[depth];
-    const tmpMatrixMember : MatrixMember = MatrixMember.createRegular(currentField.name, row[currentField.name], currentField);
+    const tmpMatrixMember: MatrixMember = MatrixMember.createRegular(currentField.name, row[currentField.name], currentField);
 
     const mm = matrixMember.matrixMembers.find(i => matrixMemberComparerFunction(i, tmpMatrixMember) == 0);
     depth++;
@@ -135,13 +135,13 @@ export class DataEngine {
 
   }
 
-  createTablixMemberHierarchy(groups : string[]) : MatrixMember {
+  createTablixMemberHierarchy(groups: string[]): MatrixMember {
 
     const groupedData = this.groupedDataFrame;
 
     const fields = groupedData.fields.filter(item => groups.some(rg => rg === item.name));
 
-    const result : MatrixMember = MatrixMember.createRoot();
+    const result: MatrixMember = MatrixMember.createRoot();
 
     const view = new DataFrameView(groupedData);
     view.forEach((row) => {
@@ -152,7 +152,7 @@ export class DataEngine {
 
   }
 
-  sortMatrixMembers(matrixMember : MatrixMember) {
+  sortMatrixMembers(matrixMember: MatrixMember) {
     matrixMember.matrixMembers.sort(matrixMemberComparerFunction);
     matrixMember.matrixMembers.forEach((mm) => this.sortMatrixMembers(mm));
   }
@@ -197,7 +197,7 @@ export class DataEngine {
 
   addTotal(matrixMember: MatrixMember) {
     
-    const total : MatrixMember = MatrixMember.createTotal();
+    const total: MatrixMember = MatrixMember.createTotal();
 
     matrixMember.matrixMembers.push(total);
 
@@ -213,7 +213,7 @@ export class DataEngine {
 
     depth--;
 
-    const empty : MatrixMember = MatrixMember.createEmpty();   
+    const empty: MatrixMember = MatrixMember.createEmpty();   
 
     total.matrixMembers.push(empty);
 
@@ -221,7 +221,7 @@ export class DataEngine {
 
   }
 
-  getDepth (matrixMember: MatrixMember) : number {
+  getDepth (matrixMember: MatrixMember): number {
 
     let result = 0;
 
@@ -274,8 +274,8 @@ export class DataEngine {
 
     const dataFieldReduced = this.createField(dataField); //do we need it?
 
-    const rowFieldsReduced : Field<any>[] = [];
-    const colFieldsReduced : Field<any>[] = [];
+    const rowFieldsReduced: Field<any>[] = [];
+    const colFieldsReduced: Field<any>[] = [];
 
     for (let i = 0; i < rowFields.length; i++){
       const rowField = rowFields[i];
@@ -312,8 +312,8 @@ export class DataEngine {
 
     });    
 
-    const aggKeyField = { name: 'AggKey', type: FieldType.string, values: aggKeyValues, display : dataField.display }
-    const aggDataField = { name: 'AggData', type: FieldType.number, values: aggDataValues, display : dataField.display }
+    const aggKeyField = { name: 'AggKey', type: FieldType.string, values: aggKeyValues, display: dataField.display }
+    const aggDataField = { name: 'AggData', type: FieldType.number, values: aggDataValues, display: dataField.display }
 
     const groupedFields = [...rowFieldsReduced, ...colFieldsReduced, dataFieldReduced, aggKeyField, aggDataField];
 
@@ -343,24 +343,24 @@ function matrixMemberComparerFunction(a: MatrixMember, b: MatrixMember): number 
 
     // 3. Compare Numbers
     if (typeof valA === 'number' && typeof valB === 'number') {
-      return ascending ? valA - valB : valB - valA;
+      return ascending ? valA - valB: valB - valA;
     }
 
     // 4. Compare Dates
     if (valA instanceof Date && valB instanceof Date) {
-      return ascending ? valA.getTime() - valB.getTime() : valB.getTime() - valA.getTime();
+      return ascending ? valA.getTime() - valB.getTime(): valB.getTime() - valA.getTime();
     }
 
     // 5. Compare Strings (case-insensitive, handles accents)
     if (typeof valA === 'string' && typeof valB === 'string') {
       const comparison = valA.localeCompare(valB);
-      return ascending ? comparison : -comparison;
+      return ascending ? comparison: -comparison;
     }
 
     // 6. Fallback for Booleans or mismatched/unknown types
     const strA = String(valA);
     const strB = String(valB);
-    return ascending ? strA.localeCompare(strB) : strB.localeCompare(strA);
+    return ascending ? strA.localeCompare(strB): strB.localeCompare(strA);
 }
 
 

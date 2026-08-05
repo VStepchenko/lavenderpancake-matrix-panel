@@ -1,6 +1,6 @@
 import React from 'react';
 import { SelectableValue, getFieldDisplayName, StandardEditorProps} from '@grafana/data';
-import { Input, Label, MultiSelect, Select, Switch, useStyles2 } from '@grafana/ui';
+import { Combobox, Input, Label, MultiSelect, Select, Switch, useStyles2 } from '@grafana/ui';
 import { AggregateFunctionType, MatrixOptions } from 'types';
 import { css } from '@emotion/css';
 
@@ -193,7 +193,7 @@ function filterOptions(options: SelectableValue<string>[], isGroupSelect : boole
                 <Label className={styles.label}>
                     AggregateFunction
                 </Label>                 
-                <Select 
+                <Combobox 
                 id = "aggregate-function-select"
                 options={agregateFunctionOptions} 
                 value={props.value.AggregateFunction} 

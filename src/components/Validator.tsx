@@ -3,7 +3,7 @@ import { MatrixOptions } from "types";
 
 export class Validator {
 
-  static validateMatrixOptions(matrixOptions : MatrixOptions): string {
+  static validateMatrixOptions(matrixOptions: MatrixOptions): string {
     
     let result = '';
 
@@ -23,7 +23,7 @@ export class Validator {
 
   }
 
-  static validateDataField(matrixOptions : MatrixOptions, data : PanelData): string {
+  static validateDataField(matrixOptions: MatrixOptions, data: PanelData): string {
     
     let result = '';
 
@@ -38,7 +38,7 @@ export class Validator {
 
   }  
 
-  static validateDataSeries(data : PanelData): string {
+  static validateDataSeries(data: PanelData): string {
     
     let result = '';
 
@@ -60,9 +60,9 @@ export class Validator {
 
   private static readonly dataFieldWarning = 'Data field must be set';
 
-  static validate(matrixOptions : MatrixOptions, data : PanelData) : string[] {
+  static validate(matrixOptions: MatrixOptions, data: PanelData): string[] {
 
-    const result : string[] = [];
+    const result: string[] = [];
 
     if (data.series.length === 0) {
         result.push(Validator.noDataWarning);
