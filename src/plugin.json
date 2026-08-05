@@ -4,17 +4,79 @@
   "name": "Matrix",
   "id": "lavenderpancake-matrix-panel",
   "info": {
-    "keywords": ["panel"],
-    "description": "",
+    "keywords": ["panel", "matrix"],
+    "description": "Matrix panel for grafana",
     "author": {
-      "name": "Lavenderpancake"
+      "name": "Lavenderpancake",
+      "email": "st.vasiliy1983@gmail.com"
     },
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"
     },
     "links": [],
-    "screenshots": [],
+        "screenshots": [
+      {
+        "name": "PanelSimple",
+        "path": "img/PanelSimple.png"
+      },
+      {
+        "name": "PanelTotal",
+        "path": "img/PanelTotal.png"
+      },
+      {
+        "name": "OptionsRowGroups",
+        "path": "img/OptionsRowGroups.png"
+      },
+      {
+        "name": "OptionsRowGroups",
+        "path": "img/OptionsColumnGroups.png"
+      },
+      {
+        "name": "OptionsDataField",
+        "path": "img/OptionsDataField.png"
+      },
+      {
+        "name": "OptionsAggregateFunction",
+        "path": "img/OptionsAggregateFunction.png"
+      },
+      {
+        "name": "OptionsShowTotals",
+        "path": "img/OptionsShowTotals.png"
+      },
+      {
+        "name": "OptionsShowTotalsGrid",
+        "path": "img/OptionsShowTotalsGrid.png"
+      },
+      {
+        "name": "OptionsTimeUnit1",
+        "path": "img/OptionsTimeUnit1.png"
+      },
+      {
+        "name": "OptionsTimeUnit2",
+        "path": "img/OptionsTimeUnit2.png"
+      },
+      {
+        "name": "NoDataWarning",
+        "path": "img/NoDataWarning.png"
+      },
+      {
+        "name": "DataFieldTypeWarning",
+        "path": "img/DataFieldTypeWarning.png"
+      },
+      {
+        "name": "ColumnGroupsFieldWarning",
+        "path": "img/ColumnGroupsFieldWarning.png"
+      },
+      {
+        "name": "RowGroupsFieldWarning",
+        "path": "img/RowGroupsFieldWarning.png"
+      },
+      {
+        "name": "DataFieldWarning",
+        "path": "img/DataFieldWarning.png"
+      }
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },

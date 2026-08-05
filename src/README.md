@@ -8,11 +8,11 @@ See the following examples:
 
 **Sales grouped by Date-Region-City and Category-Product**
 
-![PanelSimple](img/PanelSimple.png)
+![PanelSimple](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/PanelSimple.png)
 
 **The same with totals**
 
-![PanelTotal](img/PanelTotal.png)
+![PanelTotal](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/PanelTotal.png)
 
 ## Options
 
@@ -20,56 +20,56 @@ See the following examples:
 
 Choose at least one field to group rows on. The order of fields is important.
 
-![OptionsRowGroups](img/OptionsRowGroups.png)
+![OptionsRowGroups](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/OptionsRowGroups.png)
 
 ### ColumnGroups
 
 Choose at least one field to group columns on. The order of fields is important.
 
-![OptionsRowGroups](img/OptionsColumnGroups.png)
+![OptionsRowGroups](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/OptionsColumnGroups.png)
 
 ### DataField
 
 Choose the data field to aggregate data on. The field must be of number type, otherwise there will be the appropriate warning. You can use Query inspector to check field types in your data.
 
-![OptionsDataField](img/OptionsDataField.png)
+![OptionsDataField](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/OptionsDataField.png)
 
 ### AggregateFunction
 
 Choose the aggregate function for the data field. The possible options are - **Sum**, **Max**, **Min**, **Avg**, **Count**.
 
-![OptionsAggregateFunction](img/OptionsAggregateFunction.png)
+![OptionsAggregateFunction](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/OptionsAggregateFunction.png)
 
 ### ShowTotals
 
 Show or hide summary information in totals.
 
-![OptionsShowTotals](img/OptionsShowTotals.png)
+![OptionsShowTotals](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/OptionsShowTotals.png)
 
-![OptionsShowTotalsGrid](img/OptionsShowTotalsGrid.png)
+![OptionsShowTotalsGrid](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/OptionsShowTotalsGrid.png)
 
 ### TimeUnit
 
 Format the datetime values if needed. It uses grafana's format and **must** starts with 'time:'. Examples are 'time:YYYY-MM-DD', 'time:YYYY-MM-DD HH:mm:ss'.
 It applicable only for fields of datetime type, make sure appropriate field/fields is/are not of string type. You can use Query inspector for that and add 'Convert field type' transformation if needed.
 
-![OptionsTimeUnit1](img/OptionsTimeUnit1.png)
+![OptionsTimeUnit1](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/OptionsTimeUnit1.png)
 
-![OptionsTimeUnit2](img/OptionsTimeUnit2.png)
+![OptionsTimeUnit2](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/OptionsTimeUnit2.png)
 
 ### Warnings
 
 There are several checks for options and data. There are the possible warning messages.
 
-![NoDataWarning](img/NoDataWarning.png)
+![NoDataWarning](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/NoDataWarning.png)
 
-![DataFieldTypeWarning](img/DataFieldTypeWarning.png)
+![DataFieldTypeWarning](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/DataFieldTypeWarning.png)
 
-![ColumnGroupsFieldWarning](img/ColumnGroupsFieldWarning.png)
+![ColumnGroupsFieldWarning](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/ColumnGroupsFieldWarning.png)
 
-![RowGroupsFieldWarning](img/RowGroupsFieldWarning.png)
+![RowGroupsFieldWarning](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/RowGroupsFieldWarning.png)
 
-![DataFieldWarning](img/DataFieldWarning.png)
+![DataFieldWarning](https://github.com/VStepchenko/lavenderpancake-matrix-panel/blob/master/src/img/img/DataFieldWarning.png)
 
 ## Contributing
 
