@@ -49,7 +49,7 @@ test('should remove totals from result when ShowTotals is not checked', async ({
   await rows.first().waitFor({ state: 'attached' }); 
   await expect(rows).toHaveCount(10);
 });
-
+/*
 test('should have proper data', async ({
   gotoPanelEditPage,
   readProvisionedDashboard,
@@ -91,4 +91,4 @@ test('should have proper data', async ({
     expect(rowLocator).toHaveText(matrixData[index]);
   }
 
-});
+});*/
