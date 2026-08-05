@@ -49,6 +49,10 @@ test('should remove totals from result when ShowTotals is not checked', async ({
   await rows.first().waitFor({ state: 'attached' }); 
   await expect(rows).toHaveCount(10);
 });
+
+// commented due to random failures
+// maybe its needed to test table content in another
+// but table itself tested in another tests
 /*
 test('should have proper data', async ({
   gotoPanelEditPage,
