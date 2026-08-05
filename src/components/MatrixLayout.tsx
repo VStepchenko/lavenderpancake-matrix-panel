@@ -1,18 +1,19 @@
 import { AggregateData, MatrixMember, MatrixMemberType, MatrixOptions } from "types";
 import { DataEngine } from "./DataEngine";
-import { DataFrameView, FieldType, getDisplayProcessor } from "@grafana/data";
-import { useTheme2 } from "@grafana/ui";
+import { DataFrameView, FieldType, getDisplayProcessor, GrafanaTheme2 } from "@grafana/data";
 
 export class LayoutGenerator {
 
   dataEngine: DataEngine;
   matrixOptions: MatrixOptions;
+  theme: GrafanaTheme2;
   rowIndex: {[key: string]: string[]} = {};
   colIndex: {[key: string]: string[]} = {};
 
-  constructor(dataEngine: DataEngine, matrixOptions: MatrixOptions) {
+  constructor(dataEngine: DataEngine, matrixOptions: MatrixOptions, theme: GrafanaTheme2) {
     this.dataEngine = dataEngine;
     this.matrixOptions = matrixOptions;
+    this.theme = theme;
   }
 
   processColumnGroup(matrixLayout: MatrixLayout, matrixMember: MatrixMember, depth: number) {
@@ -120,7 +121,7 @@ export class LayoutGenerator {
 
         for (let i = 0; i < matrixMembers.length; i++) {
 
-            const value = matrixMembers[i].type == MatrixMemberType.Regular ? matrixMembers[i].value: this.dataEngine.wildCardKey;
+            const value = matrixMembers[i].type === MatrixMemberType.Regular ? matrixMembers[i].value: this.dataEngine.wildCardKey;
             result = result + value;
 
             if (i < (matrixMembers.length - 1) ){
@@ -152,8 +153,8 @@ export class LayoutGenerator {
                 }
 
                 //actually we can use the following even for 'regular' datacells
-                const isColTotal = bodyCell.ColumnGroups.some(cg => cg.type == MatrixMemberType.Total);
-                const isRowTotal = bodyCell.RowGroups.some(cg => cg.type == MatrixMemberType.Total);
+                const isColTotal = bodyCell.ColumnGroups.some(cg => cg.type === MatrixMemberType.Total);
+                const isRowTotal = bodyCell.RowGroups.some(cg => cg.type === MatrixMemberType.Total);
                 const isTotal = isColTotal || isRowTotal;
                 if (isTotal) {
                     const dataCells = this.getNaive(bodyCell.ColumnGroups, bodyCell.RowGroups);
@@ -266,7 +267,7 @@ export class LayoutGenerator {
                 const mm = cols[i];
                 const value = row[mm.name];
 
-                if ((mm.type == MatrixMemberType.Total) || (mm.type == MatrixMemberType.Empty)) {
+                if ((mm.type === MatrixMemberType.Total) || (mm.type === MatrixMemberType.Empty)) {
                     break;
                 }
 
@@ -279,7 +280,7 @@ export class LayoutGenerator {
                 const mm = rows[i];
                 const value = row[mm.name];
 
-                if ((mm.type == MatrixMemberType.Total) || (mm.type == MatrixMemberType.Empty)) {
+                if ((mm.type === MatrixMemberType.Total) || (mm.type === MatrixMemberType.Empty)) {
                     break;
                 }
 
@@ -419,12 +420,11 @@ export class LayoutGenerator {
         
         let value = matrixMember.value;
 
-        const isTime = (matrixMember.field) && (matrixMember.field.type == FieldType.time);
+        const isTime = (matrixMember.field) && (matrixMember.field.type === FieldType.time);
         const hasTimeUnit = (matrixMember.field) && (matrixMember.field.config.unit);
 
         if (isTime && hasTimeUnit) {
-            const theme = useTheme2();
-            const dop = { field: matrixMember.field!, theme:  theme };
+            const dop = { field: matrixMember.field!, theme:  this.theme };
             const dp = getDisplayProcessor(dop);
             const formattedvalue = dp(matrixMember.value);
             value = formattedvalue.text;
@@ -451,15 +451,20 @@ export class MatrixRow {
 
 export class MatrixCell {
 
-    colSpan: number = 1;
-    rowSpan: number = 1;
+    colSpan: number;
+    rowSpan: number;
     value: any;
-    isTotal: boolean = false;
-    isCorner: boolean = false;
-    isGroup: boolean = false;
+    isTotal: boolean;
+    isCorner: boolean;
+    isGroup: boolean;
 
     constructor (value: any) {
         this.value = value;
+        this.colSpan = 1;
+        this.rowSpan = 1;
+        this.isTotal = false;
+        this.isCorner = false;
+        this.isGroup = false;
     }
 
     toString(): string {
@@ -474,10 +479,11 @@ class DataCell {
     RowGroups: MatrixMember [] = []
 
     value: any;
-    isTotal: boolean = false;
+    isTotal: boolean;
 
     constructor (value: any) {
         this.value = value;
+        this.isTotal = false;
     }
 
     toString(): string {

@@ -7,11 +7,11 @@ export class Validator {
     
     let result = '';
 
-    if (matrixOptions.ColumnGroups.length == 0) {
+    if (matrixOptions.ColumnGroups.length === 0) {
         result += 'Column groups must contain at least one field; ';
     }
 
-    if (matrixOptions.RowGroups.length == 0) {
+    if (matrixOptions.RowGroups.length === 0) {
         result += 'Row groups must contain at least one field; ';
     }
 
@@ -30,7 +30,7 @@ export class Validator {
     const frame = data.series[0];
     const dataField = frame.fields.find(f => f.name === matrixOptions.DataField);
 
-    if ((dataField) && (dataField.type != FieldType.number)) {
+    if ((dataField) && (dataField.type !== FieldType.number)) {
         result += 'Data field must be number';
     }
 
@@ -72,16 +72,16 @@ export class Validator {
     if (frame) {
       const dataField = frame.fields.find(f => f.name === matrixOptions.DataField);
 
-      if ((dataField) && (dataField.type != FieldType.number)) {
+      if ((dataField) && (dataField.type !== FieldType.number)) {
           result.push(Validator.dataFieldTypeWarning);
       }
     }
 
-    if (matrixOptions.ColumnGroups.length == 0) {
+    if (matrixOptions.ColumnGroups.length === 0) {
         result.push(Validator.columnGroupsFieldWarning);
     }
 
-    if (matrixOptions.RowGroups.length == 0) {
+    if (matrixOptions.RowGroups.length === 0) {
         result.push(Validator.rowGroupsFieldWarning);
     }
 

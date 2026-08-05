@@ -55,7 +55,7 @@ export class MatrixMember {
 
   leafCount(): number {
     
-    if (this.matrixMembers.length == 0) {
+    if (this.matrixMembers.length === 0) {
         return 1;
     }
 

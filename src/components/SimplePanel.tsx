@@ -1,7 +1,7 @@
 import React from 'react';
 import { SimpleOptions } from 'types';
 import { css, cx } from '@emotion/css';
-import { Alert, useStyles2} from '@grafana/ui';
+import { Alert, useStyles2, useTheme2} from '@grafana/ui';
 import { PanelProps} from '@grafana/data';
 import { CustomTable } from './CustomTable';
 import { DataEngine } from './DataEngine';
@@ -21,12 +21,14 @@ const getStyles = () => {
 
 export const SimplePanel: React.FC<Props> = ({ options, data, width, height, fieldConfig, id }) => {
   const styles = useStyles2(getStyles);
+  const theme = useTheme2();
 
   let validation = Validator.validate(options.matrixOptions, data);
 
-  let validationElement = validation.map((message: string) => {
+  let validationElement = validation.map((message: string, idx) => {
         return (    
           <Alert 
+            key={idx}
             title={'Warning'} 
             severity="warning">
             {message}
@@ -41,7 +43,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height, fie
   const frame = data.series[0];
 
   let dataEngine = new DataEngine(frame, options.matrixOptions);
-  let layoutGenerator = new LayoutGenerator(dataEngine, options.matrixOptions);
+  let layoutGenerator = new LayoutGenerator(dataEngine, options.matrixOptions, theme);
 
   //console.log("Before:"+new Date().toISOString());
 

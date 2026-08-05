@@ -65,7 +65,7 @@ export const MatrixOptionsEditor = (props: Props) => {
             });
   };  
 
-  const onRowGroupsChanged = (v: SelectableValue<string>[]) => {
+  const onRowGroupsChanged = (v: Array<SelectableValue<string>>) => {
     
     const values = v.map(item => item.value!);
 
@@ -79,7 +79,7 @@ export const MatrixOptionsEditor = (props: Props) => {
             });
   }; 
 
-  const onColumnGroupsChanged = (v: SelectableValue<string>[]) => {
+  const onColumnGroupsChanged = (v: Array<SelectableValue<string>>) => {
     
     const values = v.map(item => item.value!);
 
@@ -120,7 +120,7 @@ export const MatrixOptionsEditor = (props: Props) => {
             
   }; 
 
-function filterOptions(options: SelectableValue<string>[], isGroupSelect: boolean): SelectableValue<string>[] | undefined {
+function filterOptions(options: Array<SelectableValue<string>>, isGroupSelect: boolean): Array<SelectableValue<string>> | undefined {
 
         let selectedOptions: string[] = [...props.value.RowGroups, ...props.value.ColumnGroups];
 

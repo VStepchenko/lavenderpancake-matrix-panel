@@ -22,7 +22,7 @@ export class DataEngine {
     this.rowGroups = MatrixMember.createRoot(); //dirty hack
   }
 
-  getAggKey(fields: Field<any>[], index: number): string {
+  getAggKey(fields: Array<Field<any>>, index: number): string {
 
     let result = '';
 
@@ -52,7 +52,7 @@ export class DataEngine {
       } 
     };
 
-    const isTime = (source.type == FieldType.time);
+    const isTime = (source.type === FieldType.time);
     const hasTimeUnit = this.matrixOptions.TimeUnit;
     
     if (isTime && hasTimeUnit) {
@@ -116,7 +116,7 @@ export class DataEngine {
 
   }
 
-  processGroupedDataItem(row: any, matrixMember: MatrixMember, fields: Field<any>[], depth: number) {
+  processGroupedDataItem(row: any, matrixMember: MatrixMember, fields: Array<Field<any>>, depth: number) {
 
     if (depth > fields.length - 1) {
       return;
@@ -125,7 +125,7 @@ export class DataEngine {
     const currentField = fields[depth];
     const tmpMatrixMember: MatrixMember = MatrixMember.createRegular(currentField.name, row[currentField.name], currentField);
 
-    const mm = matrixMember.matrixMembers.find(i => matrixMemberComparerFunction(i, tmpMatrixMember) == 0);
+    const mm = matrixMember.matrixMembers.find(i => matrixMemberComparerFunction(i, tmpMatrixMember) === 0);
     depth++;
 
     if (mm) {
@@ -185,7 +185,7 @@ export class DataEngine {
 
   addTotals(matrixMember: MatrixMember) {
     
-    if (matrixMember.matrixMembers.length == 0) {
+    if (matrixMember.matrixMembers.length === 0) {
       return;
     }
 
@@ -209,7 +209,7 @@ export class DataEngine {
 
   addEmptyMembers(total: MatrixMember, depth: number) {
     
-    if (depth == 1) {
+    if (depth === 1) {
       return;
     }
 
@@ -276,8 +276,8 @@ export class DataEngine {
 
     const dataFieldReduced = this.createField(dataField); //do we need it?
 
-    const rowFieldsReduced: Field<any>[] = [];
-    const colFieldsReduced: Field<any>[] = [];
+    const rowFieldsReduced: Array<Field<any>> = [];
+    const colFieldsReduced: Array<Field<any>> = [];
 
     for (let i = 0; i < rowFields.length; i++){
       const rowField = rowFields[i];
