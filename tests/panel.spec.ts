@@ -1,35 +1,47 @@
 import { test, expect } from '@grafana/plugin-e2e';
 
-test('should display "No data" in case panel data is empty', async ({
+test('should display "There is no data" in case panel data is empty', async ({
   gotoPanelEditPage,
   readProvisionedDashboard,
 }) => {
   const dashboard = await readProvisionedDashboard({ fileName: 'dashboard.json' });
   const panelEditPage = await gotoPanelEditPage({ dashboard, id: '2' });
-  await expect(panelEditPage.panel.locator).toContainText('No data');
+  await expect(panelEditPage.panel.locator).toContainText('There is no data');
 });
 
-test('should display circle when data is passed to the panel', async ({
-  panelEditPage,
-  readProvisionedDataSource,
-  page,
+test('should display "Column groups must contain at least one field" in case column group is not set', async ({
+  gotoPanelEditPage,
+  readProvisionedDashboard,
 }) => {
-  const ds = await readProvisionedDataSource({ fileName: 'datasources.yml' });
-  await panelEditPage.datasource.set(ds.name);
-  await panelEditPage.setVisualization('Matrix');
-  await expect(page.getByTestId('simple-panel-circle')).toBeVisible();
+  const dashboard = await readProvisionedDashboard({ fileName: 'dashboard.json' });
+  const panelEditPage = await gotoPanelEditPage({ dashboard, id: '2' });
+  await expect(panelEditPage.panel.locator).toContainText('There is no data');
 });
 
-test('should display series counter when "Show series counter" option is enabled', async ({
+test('should display "Row groups must contain at least one field" in case row group is not set', async ({
+  gotoPanelEditPage,
+  readProvisionedDashboard,
+}) => {
+  const dashboard = await readProvisionedDashboard({ fileName: 'dashboard.json' });
+  const panelEditPage = await gotoPanelEditPage({ dashboard, id: '2' });
+  await expect(panelEditPage.panel.locator).toContainText('Row groups must contain at least one field');
+});
+
+test('should display "Data field must be set" in case data field is not set', async ({
+  gotoPanelEditPage,
+  readProvisionedDashboard,
+}) => {
+  const dashboard = await readProvisionedDashboard({ fileName: 'dashboard.json' });
+  const panelEditPage = await gotoPanelEditPage({ dashboard, id: '2' });
+  await expect(panelEditPage.panel.locator).toContainText('Data field must be set');
+});
+
+test('should display "Data field must be number" in case data field is not number', async ({
   gotoPanelEditPage,
   readProvisionedDashboard,
   page,
 }) => {
   const dashboard = await readProvisionedDashboard({ fileName: 'dashboard.json' });
   const panelEditPage = await gotoPanelEditPage({ dashboard, id: '1' });
-  const options = panelEditPage.getCustomOptions('Matrix');
-  const showSeriesCounter = options.getSwitch('Show series counter');
-
-  await showSeriesCounter.check();
-  await expect(page.getByTestId('simple-panel-series-counter')).toBeVisible();
+  await expect(panelEditPage.panel.locator).toContainText('Data field must be number');
 });
