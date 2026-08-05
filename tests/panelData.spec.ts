@@ -28,7 +28,7 @@ test('should change datetime format according to TimeUnit option value', async (
 test('should remove totals from result when ShowTotals is not checked', async ({
   gotoPanelEditPage,
   readProvisionedDashboard,
-  page,
+  page
 }) => {
   const dashboard = await readProvisionedDashboard({ fileName: 'dashboard.json' });
   const panelEditPage = await gotoPanelEditPage({ dashboard, id: '3' });
@@ -40,8 +40,10 @@ test('should remove totals from result when ShowTotals is not checked', async ({
   await expect(table).toContainText('Total');
   await expect(rows).toHaveCount(17);
 
-  const showTotalsSwitch = options.getSwitch('ShowTotals');
-  await showTotalsSwitch.uncheck();
+  const showTotalsSwitch = options.element.getByTestId('ShowTotals');
+  await showTotalsSwitch.first().waitFor({ state: 'attached' }); 
+
+  await showTotalsSwitch.uncheck({ force: true });;
 
   rows = table.locator('tr');
   await rows.first().waitFor({ state: 'attached' }); 

@@ -143,6 +143,7 @@ function filterOptions(options: SelectableValue<string>[], isGroupSelect : boole
                     RowGroups
                 </Label>                 
                 <MultiSelect 
+                id = "row-groups-select"
                 options={filterOptions(options, true)} 
                 value={props.value.RowGroups} 
                 onChange={
@@ -159,6 +160,7 @@ function filterOptions(options: SelectableValue<string>[], isGroupSelect : boole
                     ColumnGroups
                 </Label>                 
                 <MultiSelect 
+                id = "column-groups-select"
                 options={filterOptions(options, true)} 
                 value={props.value.ColumnGroups} 
                 onChange={
@@ -175,6 +177,7 @@ function filterOptions(options: SelectableValue<string>[], isGroupSelect : boole
                     DataField
                 </Label>                 
                 <Select 
+                id = "data-field-select"
                 options={filterOptions(options, false)} 
                 value={props.value.DataField} 
                 onChange={
@@ -191,6 +194,7 @@ function filterOptions(options: SelectableValue<string>[], isGroupSelect : boole
                     AggregateFunction
                 </Label>                 
                 <Select 
+                id = "aggregate-function-select"
                 options={agregateFunctionOptions} 
                 value={props.value.AggregateFunction} 
                 onChange={
@@ -207,6 +211,8 @@ function filterOptions(options: SelectableValue<string>[], isGroupSelect : boole
                     ShowTotals
                 </Label>
                 <Switch
+                    data-testid = "ShowTotals"
+                    id = "show-totals-switch"
                     value = {props.value.ShowTotals}
                     onChange={
                         (e) => {
@@ -221,6 +227,7 @@ function filterOptions(options: SelectableValue<string>[], isGroupSelect : boole
                     TimeUnit
                 </Label>
                 <Input
+                    id = "time-unit-input"
                     data-testid = "TimeUnit"
                     type = "text"
                     value = {props.value.TimeUnit}
