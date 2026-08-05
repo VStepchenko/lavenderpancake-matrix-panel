@@ -202,7 +202,7 @@ function filterOptions(options: SelectableValue<string>[], isGroupSelect : boole
                 />
             </div> 
 
-            <div className={styles.dropWrap} aria-label='Matr ShowTotals field property editor'>  
+            <div className={styles.dropWrap}>  
                 <Label className={styles.label}>
                     ShowTotals
                 </Label>
@@ -216,7 +216,7 @@ function filterOptions(options: SelectableValue<string>[], isGroupSelect : boole
                 />
             </div>     
 
-            <div className={styles.dropWrap} aria-label='Matr TimeUnit field property editor'>  
+            <div className={styles.dropWrap}>  
                 <Label className={styles.label}>
                     TimeUnit
                 </Label>

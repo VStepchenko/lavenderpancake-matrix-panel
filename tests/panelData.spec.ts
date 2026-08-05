@@ -7,7 +7,7 @@ test('should change datetime format according to TimeUnit option value', async (
 }) => {
   const dashboard = await readProvisionedDashboard({ fileName: 'dashboard.json' });
   const panelEditPage = await gotoPanelEditPage({ dashboard, id: '3' });
-  const options = panelEditPage.getCustomOptions('Matr');
+  const options = panelEditPage.getCustomOptions('Matrix');
 
   const timeUnit = options.element.getByTestId('TimeUnit');
   await timeUnit.first().waitFor({ state: 'attached' }); 
@@ -32,7 +32,7 @@ test('should remove totals from result when ShowTotals is not checked', async ({
 }) => {
   const dashboard = await readProvisionedDashboard({ fileName: 'dashboard.json' });
   const panelEditPage = await gotoPanelEditPage({ dashboard, id: '3' });
-  const options = panelEditPage.getCustomOptions('Matr');
+  const options = panelEditPage.getCustomOptions('Matrix');
 
   const table = page.getByTestId('table');
   let rows = table.locator('tr');
